@@ -135,25 +135,55 @@ header {
 #stock-1-bar {
   background-color: rgb(255, 125, 125);
 }
+#buying-1 {
+  background-color: rgb(125, 125, 125);
+}
+#buying-1:hover {
+  background-color: rgb(255, 55, 55);
+}
 #stock-2-bar {
   background-color: rgb(125, 255, 125);
+}
+#buying-2 {
+  background-color: rgb(125, 125, 125);
+}
+#buying-2:hover {
+  background-color: rgb(55, 255, 55);
 }
 #stock-3-bar {
   background-color: rgb(125, 125, 255);
 }
+#buying-3 {
+  background-color: rgb(125, 125, 125);
+}
+#buying-3:hover {
+  background-color: rgb(55, 55, 255);
+}
 #stock-4-bar {
   background-color: rgb(255, 255, 125);
+}
+#buying-4 {
+  background-color: rgb(125, 125, 125);
+}
+#buying-4:hover {
+  background-color: rgb(255, 255, 55);
 }
 #stock-5-bar {
   background-color: rgb(255, 125, 255);
 }
+#buying-5 {
+  background-color: rgb(125, 125, 125);
+}
+#buying-5:hover {
+  background-color: rgb(255, 55, 255);
+}
 #y-axis {
-    display: flex;
-    flex-flow: column nowrap;
-    height: 707px;
-    justify-content: space-between;
-    position: relative;
-    top: 50px;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 707px;
+  justify-content: space-between;
+  position: relative;
+  top: 50px;
 }
 #y-axis div {
   position: relative;

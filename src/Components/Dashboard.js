@@ -70,53 +70,44 @@ function Dashboard() {
         buyButton.textContent = "Stop Buying";
         const barList = document.getElementById("stock-bars").children;
         for (let i = 0; i < 5; i++) {
-          barList[i].style.backgroundColor = "rgb(125, 125, 125)";
           switch (i) {
             default:
-              barList[i].addEventListener("mouseover", () => {
-                barList[i].style.backgroundColor = "rgb(225, 55, 55)";
-              });
-              barList[i].addEventListener("mouseout", () => {
-                barList[i].style.backgroundColor = "rgb(125, 125, 125)";
-              });
+              barList[i].setAttribute("id", "buying-1");
               break;
             case 1:
-              barList[i].addEventListener("mouseover", () => {
-                barList[i].style.backgroundColor = "rgb(55, 225, 55)";
-              });
-              barList[i].addEventListener("mouseout", () => {
-                barList[i].style.backgroundColor = "rgb(125, 125, 125)";
-              });
+              barList[i].setAttribute("id", "buying-2");
               break;
             case 2:
-              barList[i].addEventListener("mouseover", () => {
-                barList[i].style.backgroundColor = "rgb(55, 55, 255)";
-              });
-              barList[i].addEventListener("mouseout", () => {
-                barList[i].style.backgroundColor = "rgb(125, 125, 125)";
-              });
+              barList[i].setAttribute("id", "buying-3");
               break;
             case 3:
-              barList[i].addEventListener("mouseover", () => {
-                barList[i].style.backgroundColor = "rgb(255, 255, 55)";
-              });
-              barList[i].addEventListener("mouseout", () => {
-                barList[i].style.backgroundColor = "rgb(125, 125, 125)";
-              });
+              barList[i].setAttribute("id", "buying-4");
               break;
             case 4:
-              barList[i].addEventListener("mouseover", () => {
-                barList[i].style.backgroundColor = "rgb(255, 55, 255)";
-              });
-              barList[i].addEventListener("mouseout", () => {
-                barList[i].style.backgroundColor = "rgb(125, 125, 125)";
-              });
+              barList[i].setAttribute("id", "buying-5");
               break;
           }
         }
       } else {
         for (let i = 0; i < 5; i++) {
           barList[i].style.backgroundColor = "";
+          switch (i) {
+            default:
+              barList[i].setAttribute("id", "stock-1-bar");
+              break;
+            case 1:
+              barList[i].setAttribute("id", "stock-2-bar");
+              break;
+            case 2:
+              barList[i].setAttribute("id", "stock-3-bar");
+              break;
+            case 3:
+              barList[i].setAttribute("id", "stock-4-bar");
+              break;
+            case 4:
+              barList[i].setAttribute("id", "stock-5-bar");
+              break;
+          }
         }
         pauseButton.disabled = false;
         stopButton.disabled = false;
