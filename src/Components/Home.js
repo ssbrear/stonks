@@ -12,7 +12,7 @@ function Home() {
         random!
       </p>
       <p>Are you able to come out on top?</p>
-      <img alt="Game dashboard" src="https://via.placeholder.com/450"></img>
+      <img alt="Game dashboard" src="stonks-picture.PNG"></img>
       <p>There will be 5 total stocks that change share value every second.</p>
       <p>
         You will be given $100 to begin, with each stock starting at $1 per

@@ -36,6 +36,7 @@ function Dashboard() {
     const stopButton = document.getElementById("stop-button");
     const playButton = document.getElementById("play-button");
     const buyButton = document.getElementById("buy-button");
+    const modalWindow = document.getElementById("modal");
     playButton.addEventListener("click", () => {
       playing = true;
       playButton.disabled = true;
@@ -90,6 +91,7 @@ function Dashboard() {
         }
       } else {
         for (let i = 0; i < 5; i++) {
+          buyButton.textContent = "Buy Stonks";
           barList[i].style.backgroundColor = "";
           switch (i) {
             default:
@@ -114,8 +116,38 @@ function Dashboard() {
         buying = false;
       }
     });
+    window.onclick = (e) => {
+      e.preventDefault();
+      if (e.target.id.includes("buying")) {
+        const stockNum = parseInt(
+          (document.getElementById(
+            "selected-stock"
+          ).textContent = e.target.id.slice(-1))
+        );
+        document.getElementById("select-stock-price").textContent =
+          Math.ceil(100 * stocks[stockNum - 1]) / 100;
+        modalWindow.style.display = "block";
+      } else if (e.target.id === "modal-buy-button") {
+      } else if (e.target.id === "modal-done-button") {
+        modalWindow.style.display = "none";
+      }
+    };
   });
-  return (
+  return [
+    <section id="modal">
+      <form id="modal-content">
+        <label for="">
+          How many shares of Stonk <span id="selected-stock"></span> would you
+          like to buy?
+        </label>
+        <input id="number-of-shares"></input>
+        <small>
+          Share price is currently: $<span id="select-stock-price"></span>
+        </small>
+        <button id="modal-buy-button">Buy</button>
+        <button id="modal-done-button">Done</button>
+      </form>
+    </section>,
     <main id="dashboard-main">
       <section id="time-control">
         <button id="play-button">Start</button>
@@ -166,8 +198,8 @@ function Dashboard() {
           <div>Stonk 5</div>
         </div>
       </section>
-    </main>
-  );
+    </main>,
+  ];
 }
 
 export default Dashboard;
