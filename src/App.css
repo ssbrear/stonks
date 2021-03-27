@@ -140,29 +140,22 @@ header {
   background-color: rgb(255, 125, 255);
 }
 #y-axis {
-  position: absolute;
-  left: 35px;
-  height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    height: 707px;
+    justify-content: space-between;
+    position: relative;
+    top: 50px;
 }
-#y-label {
-  font-size: 1.5rem;
-  height: 5%;
-}
-#y-values {
-  display: flex;
-  flex-flow: column nowrap;
-  height: 89.6%;
-  justify-content: space-between;
-}
-#y-values div {
+#y-axis div {
   position: relative;
-  left: 50px;
+  left: 85px;
   z-index: 1;
 }
-#y-values div::after {
+#y-axis div::after {
   content: "--";
 }
-#y-values div::before {
+#y-axis div::before {
   content: "$";
 }
 #time-control {

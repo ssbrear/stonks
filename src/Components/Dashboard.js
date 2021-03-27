@@ -1,24 +1,26 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 
 function Dashboard() {
+  // Initialized stock value
   let stocks = [1, 1, 1, 1, 1];
-  useEffect(() => {
-    setInterval(loop, 1000);
-  });
+
+  // Game loop only enters when a boolean is equal to true
   const loop = () => {
-    let changes = [];
-    for (let i = 0; i < 5; i++) {
-      changes.push(Math.random() - Math.random());
+    if (playing === true) {
+      let changes = [];
+      for (let i = 0; i < 5; i++) {
+        changes.push(Math.random() - Math.random());
+      }
+      stocks = stocks.map((x, i) => {
+        let newX = x + changes[i];
+        if (newX < 0.1) return 0.1;
+        if (newX > 1.9) return 1.9;
+        return newX;
+      });
+      changeBars();
     }
-    stocks = stocks.map((x, i) => {
-      let newX = x + changes[i];
-      if (newX < 0.1) return 0.1;
-      if (newX > 1.9) return 1.9;
-      return newX;
-    });
-    changeBars();
   };
+  // CSS control based on stock value
   const changeBars = () => {
     const barList = document.getElementById("stock-bars").children;
     for (let i = 0; i < 5; i++) {
@@ -26,12 +28,34 @@ function Dashboard() {
       barList[i].style.height = String(355.56 * value + 4.444) + "px";
     }
   };
+  // Logic to determine state of game
+  let playing = false;
+  setInterval(loop, 1000);
+  const startGame = () => {
+    playing = true;
+    document.getElementById("play-button").disabled = true;
+  };
+  const pauseGame = () => {
+    if (playing === true) playing = false;
+    else playing = true;
+  };
+  const stopGame = () => {
+    playing = false;
+    document.getElementById("pause-button").disabled = true;
+    document.getElementById("stop-button").disabled = true;
+  };
   return (
     <main id="dashboard-main">
       <section id="time-control">
-        <button id="play-button">Play</button>
-        <button id="pause-button">Pause</button>
-        <button id="stop-button">Stop</button>
+        <button id="play-button" onClick={startGame}>
+          Play
+        </button>
+        <button id="pause-button" onClick={pauseGame}>
+          Pause
+        </button>
+        <button id="stop-button" onClick={stopGame}>
+          Stop
+        </button>
       </section>
       <section id="player-info">
         <p>Wallet</p>
@@ -47,13 +71,10 @@ function Dashboard() {
       </section>
       <section id="stock-info">
         <aside id="y-axis">
-          <div id="y-label">Value</div>
-          <div id="y-values">
-            <div>2.00</div>
-            <div>1.50</div>
-            <div>0.50</div>
-            <div>0.00</div>
-          </div>
+          <div>2.00</div>
+          <div>1.50</div>
+          <div>0.50</div>
+          <div>0.00</div>
         </aside>
         <div id="stock-bars">
           <div id="stock-1-bar"></div>
