@@ -1,45 +1,163 @@
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
 
 body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    color: #333;
+  margin: 0;
+  color: #333;
 }
+
+/* HOME STYLING */
+
 header {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 #title {
-    font-size: 5rem;
-    font-family: Luckiest Guy;
+  font-size: 5rem;
+  font-family: Luckiest Guy;
 }
-main {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin: 24px 0;
+#home-main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 24px 0;
 }
-main p {
-    font-size: 1.75rem;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    margin: 0.5rem 0;
+#home-main p {
+  font-size: 1.75rem;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin: 0.5rem 0;
 }
-main img {
-    margin: 1rem 0;
+#home-main img {
+  margin: 1rem 0;
 }
-main a {
-    outline: none;
-    border: none;
-    font-size: 2rem;
-    background-color: #333;
-    border-radius: 4px;
-    padding: 12px 24px;
-    margin-top: 2rem;
-    cursor: pointer;
-    text-decoration: none;
-    color: #eee;
+#home-main a {
+  outline: none;
+  border: none;
+  font-size: 2rem;
+  background-color: #333;
+  border-radius: 4px;
+  padding: 12px 24px;
+  margin-top: 2rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: #eee;
 }
-main a:active {
-    background-color: #111;
+#home-main a:active {
+  background-color: #111;
+}
+
+/* DASHBOARD STYLING */
+
+#dashboard-main {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#dashboard-main section {
+  position: fixed;
+  bottom: 100px;
+  border: 1px dotted black;
+  background-color: rgb(195, 227, 255);
+}
+#player-info {
+  width: 600px;
+  height: 500px;
+  left: 50px;
+  border-radius: 12px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  flex-flow: column nowrap;
+}
+#player-info p {
+  margin: 1rem 0;
+  font-size: 2rem;
+}
+#player-info p:first-child {
+  font-size: 5rem;
+  margin-bottom: 3rem;
+}
+#stock-info {
+  width: 1150px;
+  height: 800px;
+  right: 50px;
+}
+#player-cash {
+  margin: 0;
+}
+#stock-info {
+}
+#stock-graph {
+  width: 1000px;
+  height: 700px;
+  background-color: white;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  position: absolute;
+  left: 125px;
+  bottom: 75px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+#stock-graph div {
+  padding: 0 50px;
+  position: relative;
+  top: 25px;
+}
+#stock-bars {
+  display: flex;
+  flex-flow: row nowrap;
+  position: absolute;
+  left: 30px;
+  bottom: 75px;
+}
+#stock-bars div {
+  width: 100px;
+  height: 500px;
+  border: 1px solid black;
+  z-index: 1;
+  margin-left: 7rem;
+}
+#stock-1-bar {
+    background-color: rgb(255, 125, 125);
+}
+#stock-2-bar {
+    background-color: rgb(125, 255, 125);
+}
+#stock-3-bar {
+    background-color: rgb(125, 125, 255);
+}
+#stock-4-bar {
+    background-color: rgb(255, 255, 125);
+}
+#stock-5-bar {
+    background-color: rgb(255, 125, 255);
+}
+#y-axis {
+  position: absolute;
+  left: 35px;
+  height: 100%;
+}
+#y-label {
+  font-size: 1.5rem;
+  height: 5%;
+}
+#y-values {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 85.8%;
+  justify-content: space-between;
+}
+#y-values div {
+  position: relative;
+  left: 50px;
+  z-index: 1;
+}
+#y-values div::after {
+  content: "_";
+}
+#y-values div::before {
+  content: "$";
 }

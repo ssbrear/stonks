@@ -7,7 +7,7 @@ function Home() {
     <header>
       <div id="title">Stonks</div>
     </header>,
-    <main>
+    <main id="home-main">
       <p>
         Test yourself in a stonk market that is interpreted as being completely
         random!
