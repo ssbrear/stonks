@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 function Dashboard() {
   // Initialized stock value
   let stocks = [1, 1, 1, 1, 1];
+  let cashHand = 100;
+  let cashInvested = 0;
 
   // Game loop only enters when a boolean is equal to true
   const loop = () => {
@@ -126,12 +128,52 @@ function Dashboard() {
         );
         document.getElementById("select-stock-price").textContent =
           Math.ceil(100 * stocks[stockNum - 1]) / 100;
+        document.getElementById("number-of-shares").value = 0;
+        document.getElementById("select-stock-amount").textContent = `${
+          document.getElementById("select-stock-price").textContent +
+          " x 0 = $0"
+        }`;
         modalWindow.style.display = "block";
       } else if (e.target.id === "modal-buy-button") {
+        const numberfSharesToBuy = document.getElementById("number-of-shares")
+          .value;
+        const pricePerShare = document.getElementById("select-stock-price")
+          .textContent;
+        const cost =
+          Math.ceil(
+            100 * parseFloat(numberfSharesToBuy) * parseFloat(pricePerShare)
+          ) / 100;
+        if (cashHand >= cost) {
+          cashHand = cashHand - cost;
+          cashInvested = cashInvested + cost;
+          document.getElementById("player-cash").textContent = cashHand;
+          document.getElementById("player-invested").textContent = cashInvested;
+          document.getElementById("player-total").textContent =
+            cashInvested + cashHand;
+        } else {
+          alert("You do not have enough money for that purchase");
+        }
       } else if (e.target.id === "modal-done-button") {
+        modalWindow.style.display = "none";
+      } else if (e.target.id === "modal") {
         modalWindow.style.display = "none";
       }
     };
+    document
+      .getElementById("number-of-shares")
+      .addEventListener("input", () => {
+        const numShares = document.getElementById("number-of-shares").value;
+        const pricePerShare = document.getElementById("select-stock-price")
+          .textContent;
+        const totalValue = parseFloat(numShares) * parseFloat(pricePerShare);
+        document.getElementById("select-stock-amount").textContent = `${
+          pricePerShare +
+          " x " +
+          numShares +
+          " = $" +
+          (Math.ceil(100 * totalValue) / 100).toFixed(2)
+        }`;
+      });
   });
   return [
     <section id="modal">
@@ -140,9 +182,12 @@ function Dashboard() {
           How many shares of Stonk <span id="selected-stock"></span> would you
           like to buy?
         </label>
-        <input id="number-of-shares"></input>
+        <input min="0" step="1" type="number" id="number-of-shares"></input>
         <small>
           Share price is currently: $<span id="select-stock-price"></span>
+        </small>
+        <small>
+          Currently Buying: $<span id="select-stock-amount"></span>
         </small>
         <button id="modal-buy-button">Buy</button>
         <button id="modal-done-button">Done</button>

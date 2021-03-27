@@ -57,7 +57,7 @@ header {
 }
 #dashboard-main section {
   position: fixed;
-  bottom: 100px;
+  bottom: 50px;
   border: 1px dotted black;
   background-color: rgb(195, 227, 255);
 }
@@ -89,14 +89,12 @@ header {
 }
 #stock-info {
   width: 1150px;
-  height: 800px;
+  height: 850px;
   right: 50px;
+  flex-flow: column-reverse wrap;
 }
 #player-cash {
   margin: 0;
-}
-#stock-info {
-  flex-flow: column-reverse wrap;
 }
 #stock-graph {
   width: 1000px;
@@ -123,7 +121,7 @@ header {
   flex-flow: row nowrap;
   position: absolute;
   left: 125px;
-  top: 50px;
+  top: 100px;
   justify-content: space-around;
 }
 #stock-bars div {
@@ -185,7 +183,7 @@ header {
   height: 707px;
   justify-content: space-between;
   position: relative;
-  top: 50px;
+  top: 100px;
 }
 #y-axis div {
   position: relative;
@@ -246,7 +244,14 @@ header {
   align-items: center;
 }
 #number-of-shares {
-  width: 100px;
+  width: 50px;
+  text-align: right;
+  background-color: inherit;
+  border: none;
+  outline: none;
+}
+input[type=number]::-webkit-inner-spin-button {
+  opacity: 1
 }
 small {
   font-size: 1rem;
