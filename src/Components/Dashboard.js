@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 function Dashboard() {
   // Initialized stock value
   let stocks = [1, 1, 1, 1, 1];
+  let ownedStocks = [0, 0, 0, 0, 0];
   let cashHand = 100;
   let cashInvested = 0;
 
@@ -13,6 +14,16 @@ function Dashboard() {
       for (let i = 0; i < 5; i++) {
         changes.push(Math.random() - Math.random());
       }
+      cashInvested += changes
+        .map((x, i) => x * ownedStocks[i])
+        .reduce((a, b) => a + b);
+      document.getElementById(
+        "player-invested"
+      ).textContent = cashInvested.toFixed(2);
+      document.getElementById("player-total").textContent = (
+        parseFloat(document.getElementById("player-cash").textContent) +
+        cashInvested
+      ).toFixed(2);
       stocks = stocks.map((x, i) => {
         let newX = x + changes[i];
         if (newX < 0.01) return 0.01;
@@ -144,6 +155,11 @@ function Dashboard() {
             100 * parseFloat(numberfSharesToBuy) * parseFloat(pricePerShare)
           ) / 100;
         if (cashHand >= cost) {
+          const boughtStock = parseInt(
+            document.getElementById("selected-stock").textContent
+          );
+          ownedStocks[boughtStock - 1] += numberfSharesToBuy;
+          console.log(ownedStocks);
           cashHand = cashHand - cost;
           cashInvested = cashInvested + cost;
           document.getElementById("player-cash").textContent = cashHand;
