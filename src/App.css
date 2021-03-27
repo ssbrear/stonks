@@ -28,16 +28,18 @@ main p {
 main img {
     margin: 1rem 0;
 }
-main button {
+main a {
     outline: none;
     border: none;
     font-size: 2rem;
-    background-color: rgb(102, 209, 102);
+    background-color: #333;
     border-radius: 4px;
-    padding: 8px;
+    padding: 12px 24px;
     margin-top: 2rem;
     cursor: pointer;
+    text-decoration: none;
+    color: #eee;
 }
-main button:active {
-    background-color: rgb(74, 156, 74);
+main a:active {
+    background-color: #111;
 }
