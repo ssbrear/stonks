@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function Dashboard() {
   // Initialized stock value
@@ -13,8 +13,8 @@ function Dashboard() {
       }
       stocks = stocks.map((x, i) => {
         let newX = x + changes[i];
-        if (newX < 0.1) return 0.1;
-        if (newX > 1.9) return 1.9;
+        if (newX < 0.01) return 0.01;
+        if (newX > 1.99) return 1.99;
         return newX;
       });
       changeBars();
@@ -25,35 +25,113 @@ function Dashboard() {
     const barList = document.getElementById("stock-bars").children;
     for (let i = 0; i < 5; i++) {
       const value = stocks[i];
-      barList[i].style.height = String(355.56 * value + 4.444) + "px";
+      barList[i].style.height = String(346.67 * value - 3.333) + "px";
     }
   };
   // Logic to determine state of game
   let playing = false;
   setInterval(loop, 1000);
-  const startGame = () => {
-    playing = true;
-    document.getElementById("play-button").disabled = true;
-  };
-  const pauseGame = () => {
-    if (playing === true) playing = false;
-    else playing = true;
-  };
-  const stopGame = () => {
-    playing = false;
-    document.getElementById("pause-button").disabled = true;
-    document.getElementById("stop-button").disabled = true;
-  };
+  useEffect(() => {
+    const pauseButton = document.getElementById("pause-button");
+    const stopButton = document.getElementById("stop-button");
+    const playButton = document.getElementById("play-button");
+    const buyButton = document.getElementById("buy-button");
+    playButton.addEventListener("click", () => {
+      playing = true;
+      playButton.disabled = true;
+      pauseButton.disabled = false;
+      stopButton.disabled = false;
+      buyButton.disabled = false;
+    });
+    pauseButton.addEventListener("click", () => {
+      if (playing === true) {
+        playing = false;
+        pauseButton.textContent = "Continue";
+      } else {
+        playing = true;
+        pauseButton.textContent = "Pause";
+      }
+    });
+    stopButton.addEventListener("click", () => {
+      playing = false;
+      pauseButton.disabled = true;
+      stopButton.disabled = true;
+    });
+    let buying = false;
+    buyButton.addEventListener("click", () => {
+      const barList = document.getElementById("stock-bars").children;
+      if (buying === false) {
+        buying = true;
+        if (playing === true) {
+          pauseButton.click();
+        }
+        pauseButton.disabled = true;
+        stopButton.disabled = true;
+        buyButton.textContent = "Stop Buying";
+        const barList = document.getElementById("stock-bars").children;
+        for (let i = 0; i < 5; i++) {
+          barList[i].style.backgroundColor = "rgb(125, 125, 125)";
+          switch (i) {
+            default:
+              barList[i].addEventListener("mouseover", () => {
+                barList[i].style.backgroundColor = "rgb(225, 55, 55)";
+              });
+              barList[i].addEventListener("mouseout", () => {
+                barList[i].style.backgroundColor = "rgb(125, 125, 125)";
+              });
+              break;
+            case 1:
+              barList[i].addEventListener("mouseover", () => {
+                barList[i].style.backgroundColor = "rgb(55, 225, 55)";
+              });
+              barList[i].addEventListener("mouseout", () => {
+                barList[i].style.backgroundColor = "rgb(125, 125, 125)";
+              });
+              break;
+            case 2:
+              barList[i].addEventListener("mouseover", () => {
+                barList[i].style.backgroundColor = "rgb(55, 55, 255)";
+              });
+              barList[i].addEventListener("mouseout", () => {
+                barList[i].style.backgroundColor = "rgb(125, 125, 125)";
+              });
+              break;
+            case 3:
+              barList[i].addEventListener("mouseover", () => {
+                barList[i].style.backgroundColor = "rgb(255, 255, 55)";
+              });
+              barList[i].addEventListener("mouseout", () => {
+                barList[i].style.backgroundColor = "rgb(125, 125, 125)";
+              });
+              break;
+            case 4:
+              barList[i].addEventListener("mouseover", () => {
+                barList[i].style.backgroundColor = "rgb(255, 55, 255)";
+              });
+              barList[i].addEventListener("mouseout", () => {
+                barList[i].style.backgroundColor = "rgb(125, 125, 125)";
+              });
+              break;
+          }
+        }
+      } else {
+        for (let i = 0; i < 5; i++) {
+          barList[i].style.backgroundColor = "";
+        }
+        pauseButton.disabled = false;
+        stopButton.disabled = false;
+        buying = false;
+      }
+    });
+  });
   return (
     <main id="dashboard-main">
       <section id="time-control">
-        <button id="play-button" onClick={startGame}>
-          Play
-        </button>
-        <button id="pause-button" onClick={pauseGame}>
+        <button id="play-button">Start</button>
+        <button id="pause-button" disabled>
           Pause
         </button>
-        <button id="stop-button" onClick={stopGame}>
+        <button id="stop-button" disabled>
           Stop
         </button>
       </section>
@@ -68,11 +146,17 @@ function Dashboard() {
         <p>
           Cash total: $<span id="player-total">100</span>
         </p>
+        <p>
+          <button id="buy-button" disabled>
+            Buy Stonks
+          </button>
+        </p>
       </section>
       <section id="stock-info">
         <aside id="y-axis">
           <div>2.00</div>
           <div>1.50</div>
+          <div>1.00</div>
           <div>0.50</div>
           <div>0.00</div>
         </aside>
