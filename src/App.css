@@ -86,6 +86,7 @@ header {
   margin: 0;
 }
 #stock-info {
+  flex-flow: column-reverse wrap;
 }
 #stock-graph {
   width: 1000px;
@@ -97,43 +98,46 @@ header {
   left: 125px;
   bottom: 50px;
   display: flex;
-  flex-flow: row nowrap;
-  align-items: flex-end;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 #stock-graph div {
-  padding: 0 50px;
+  display: flex;
+  align-items: flex-end;
   position: relative;
   top: 25px;
 }
 #stock-bars {
+  width: 1000px;
+  height: 700px;
   display: flex;
   flex-flow: row nowrap;
   position: absolute;
-  left: 30px;
-  bottom: 50px;
+  left: 125px;
+  top: 50px;
+  justify-content: space-around;
 }
 #stock-bars div {
   width: 100px;
   height: 350px;
   border: 1px solid black;
   z-index: 1;
-  margin-left: 7rem;
+  transition: height 1s;
+  align-self: flex-end;
 }
 #stock-1-bar {
-    background-color: rgb(255, 125, 125);
+  background-color: rgb(255, 125, 125);
 }
 #stock-2-bar {
-    background-color: rgb(125, 255, 125);
+  background-color: rgb(125, 255, 125);
 }
 #stock-3-bar {
-    background-color: rgb(125, 125, 255);
+  background-color: rgb(125, 125, 255);
 }
 #stock-4-bar {
-    background-color: rgb(255, 255, 125);
+  background-color: rgb(255, 255, 125);
 }
 #stock-5-bar {
-    background-color: rgb(255, 125, 255);
+  background-color: rgb(255, 125, 255);
 }
 #y-axis {
   position: absolute;
@@ -162,22 +166,22 @@ header {
   content: "$";
 }
 #time-control {
-    width: 615px;
-    height: 200px;
-    bottom: auto;
-    top: 100px;
-    left: 50px;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-    border-radius: 12px;
+  width: 615px;
+  height: 200px;
+  bottom: auto;
+  top: 100px;
+  left: 50px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  border-radius: 12px;
 }
 #time-control button {
-    outline: none;
-    width: 100px;
-    height: 50px;
-    background-color: white;
-    border: 1px solid black;
-    position: relative;
-    top: 75px;
+  outline: none;
+  width: 100px;
+  height: 50px;
+  background-color: white;
+  border: 1px solid black;
+  position: relative;
+  top: 75px;
 }
