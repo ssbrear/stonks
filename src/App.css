@@ -95,7 +95,7 @@ header {
   border-left: 1px solid black;
   position: absolute;
   left: 125px;
-  bottom: 75px;
+  bottom: 50px;
   display: flex;
   flex-flow: row nowrap;
   align-items: flex-end;
@@ -111,11 +111,11 @@ header {
   flex-flow: row nowrap;
   position: absolute;
   left: 30px;
-  bottom: 75px;
+  bottom: 50px;
 }
 #stock-bars div {
   width: 100px;
-  height: 500px;
+  height: 350px;
   border: 1px solid black;
   z-index: 1;
   margin-left: 7rem;
@@ -147,7 +147,7 @@ header {
 #y-values {
   display: flex;
   flex-flow: column nowrap;
-  height: 85.8%;
+  height: 89.6%;
   justify-content: space-between;
 }
 #y-values div {
@@ -156,8 +156,28 @@ header {
   z-index: 1;
 }
 #y-values div::after {
-  content: "_";
+  content: "--";
 }
 #y-values div::before {
   content: "$";
+}
+#time-control {
+    width: 615px;
+    height: 200px;
+    bottom: auto;
+    top: 100px;
+    left: 50px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    border-radius: 12px;
+}
+#time-control button {
+    outline: none;
+    width: 100px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid black;
+    position: relative;
+    top: 75px;
 }
