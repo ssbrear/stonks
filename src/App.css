@@ -237,11 +237,17 @@ header {
   border-radius: 24px;
   background-color: rgb(195, 227, 255);
   border: 1px solid black;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  padding: 24px;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+}
+#modal-content section {
   display: flex;
   flex-flow: column nowrap;
-  padding: 24px;
   align-items: center;
+  justify-content: space-around;
 }
 #number-of-shares {
   width: 50px;
