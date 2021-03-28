@@ -17,8 +17,6 @@ function Dashboard() {
           changes.push(Math.random() - Math.random());
         } else changes.push(0);
       }
-      console.log(changes);
-      console.log(stocks);
       let newStocks = stocks.map((x, i) => {
         let newX = x + changes[i];
         if (newX < 0.01) {
@@ -33,24 +31,11 @@ function Dashboard() {
         }
         return newX;
       });
-      console.log(newStocks);
-      console.log("The change in stonk 1 price is: " + changes[0]);
-      console.log(
-        "The price of Stock 1 changed from " +
-          stocks[0] +
-          " to " +
-          String(stocks[0] + changes[0]) +
-          ". This is an increase/decrease of " +
-          String((100 * Math.abs(changes[0])) / stocks[0]) +
-          "%"
-      );
-      console.log("Prior to this second, you had " + cashInvested);
       cashInvested = ownedStocks
         .map((x, i) => {
           return x * stocks[i] * (1 + changes[i] / stocks[i]);
         })
         .reduce((a, b) => a + b);
-      console.log("Now you have " + cashInvested);
       stocks = newStocks;
       document.getElementById(
         "player-invested"
@@ -168,11 +153,11 @@ function Dashboard() {
         document.getElementsByClassName(
           "selected-stock"
         )[1].textContent = e.target.id.slice(-1);
-        document.getElementById("select-stock-price").textContent =
+        document.getElementById("select-stock-price-buy").textContent =
           Math.ceil(100 * stocks[stockNum - 1]) / 100;
         document.getElementById("number-of-shares-to-buy").value = 0;
-        document.getElementById("select-stock-amount").textContent = `${
-          document.getElementById("select-stock-price").textContent +
+        document.getElementById("select-stock-amount-buy").textContent = `${
+          document.getElementById("select-stock-price-buy").textContent +
           " x 0 = $0"
         }`;
         modalWindow.style.display = "block";
@@ -180,7 +165,7 @@ function Dashboard() {
         const numberOfSharesToBuy = parseInt(
           document.getElementById("number-of-shares-to-buy").value
         );
-        const pricePerShare = document.getElementById("select-stock-price")
+        const pricePerShare = document.getElementById("select-stock-price-buy")
           .textContent;
         const cost =
           Math.ceil(
@@ -205,6 +190,30 @@ function Dashboard() {
         } else {
           alert("You do not have enough money for that purchase");
         }
+      } else if (e.target.id === "modal-sell-button") {
+        const numberOfSharesToSell = parseInt(
+          document.getElementById("number-of-shares-to-sell").value
+        );
+        const stockIndex =
+          parseInt(
+            document.getElementsByClassName("selected-stock")[0].textContent
+          ) - 1;
+        if (numberOfSharesToSell > ownedStocks[stockIndex]) {
+          alert("You do not own that many shares.");
+        } else {
+          cashHand += stocks[stockIndex] * numberOfSharesToSell;
+          cashInvested -= stocks[stockIndex] * numberOfSharesToSell;
+          ownedStocks[stockIndex] -= numberOfSharesToSell;
+          document.getElementById("player-cash").textContent = cashHand.toFixed(
+            2
+          );
+          document.getElementById(
+            "player-invested"
+          ).textContent = cashInvested.toFixed(2);
+          document.getElementById("player-total").textContent = (
+            cashInvested + cashHand
+          ).toFixed(2);
+        }
       } else if (e.target.id === "modal-done-button") {
         modalWindow.style.display = "none";
       } else if (e.target.id === "modal") {
@@ -216,10 +225,10 @@ function Dashboard() {
       .addEventListener("input", () => {
         const numShares = document.getElementById("number-of-shares-to-buy")
           .value;
-        const pricePerShare = document.getElementById("select-stock-price")
+        const pricePerShare = document.getElementById("select-stock-price-buy")
           .textContent;
         const totalValue = parseFloat(numShares) * parseFloat(pricePerShare);
-        document.getElementById("select-stock-amount").textContent = `${
+        document.getElementById("select-stock-amount-buy").textContent = `${
           pricePerShare +
           " x " +
           numShares +
@@ -243,10 +252,10 @@ function Dashboard() {
             id="number-of-shares-to-buy"
           ></input>
           <small>
-            Share price is currently: $<span id="select-stock-price"></span>
+            Share price is currently: $<span id="select-stock-price-buy"></span>
           </small>
           <small>
-            Currently Buying: $<span id="select-stock-amount"></span>
+            Currently Buying: $<span id="select-stock-amount-buy"></span>
           </small>
           <button id="modal-buy-button">Buy</button>
         </section>
@@ -263,10 +272,11 @@ function Dashboard() {
             id="number-of-shares-to-sell"
           ></input>
           <small>
-            Share price is currently: $<span id="select-stock-price"></span>
+            Share price is currently: $
+            <span id="select-stock-price-sell"></span>
           </small>
           <small>
-            Currently Buying: $<span id="select-stock-amount"></span>
+            Currently Selling: $<span id="select-stock-amount-sell"></span>
           </small>
           <button id="modal-sell-button">Sell</button>
           <button id="modal-done-button">Done</button>

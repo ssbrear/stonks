@@ -249,7 +249,7 @@ header {
   align-items: center;
   justify-content: space-around;
 }
-#number-of-shares {
+#number-of-shares-to-buy, #number-of-shares-to-sell {
   width: 50px;
   text-align: right;
   background-color: inherit;
